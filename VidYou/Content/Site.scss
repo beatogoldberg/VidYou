@@ -1,0 +1,504 @@
+@import 'BootstrapSCSS/bootstrap';
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono:700|Ubuntu:500,700');
+$bodyColor: #fff;
+
+$shadows: (large: 0 1rem 3rem rgba(0, 0, 0, .175),
+regular: 0 .5rem 1rem rgba(0, 0, 0, .15),
+small: 0 .125rem .25rem rgba(0, 0, 0, .075));
+
+$colors: (primary: (base: rgba(255, 105, 1, 1),
+light: lighten(rgba(255, 105, 1, 1), 15%),
+dark: darken(rgba(255, 105, 1, 1), 15%),
+trans: transparentize(rgba(255, 105, 1, 1), 0.5),
+extratrans: transparentize(rgba(255, 105, 1, 1), 0.8)),
+secondary: (base: rgba(238, 11, 119, 1),
+light: lighten(rgba(238, 11, 119, 1), 15%),
+dark: darken(rgba(238, 11, 119, 1), 15%),
+trans: transparentize(rgba(238, 11, 119, 1), 0.5),
+extratrans: transparentize(rgba(238, 11, 119, 1), 0.8)));
+
+
+@function color($color-name, $color-variant) {
+    @return map-get(map-get($colors, $color-name), $color-variant);
+}
+
+@function shadow($shadow-name) {
+    @return map-get($shadows, $shadow-name);
+}
+
+$bodyGradient: linear-gradient(130deg, color(secondary, base) 0%, color(primary, base) 100%);
+$bodyRadialGradient: radial-gradient(circle at top 3rem left 3rem, rgba(239, 11, 121, 0.7), rgba(252, 29, 96, 0.7), rgba(255, 56, 73, 0.7), rgba(255, 81, 46, 0.7), rgba(255, 106, 0, 0.7));
+// جعل كل عنصر في الصفحة ينتهي محتواه عند حَده بدلاً من خارج حافته
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+$bodyFont: 'Ubuntu',
+-apple-system,
+BlinkMacSystemFont,
+'Segoe UI',
+Roboto,
+Oxygen,
+Ubuntu,
+Cantarell,
+'Open Sans',
+'Helvetica Neue',
+sans-serif;
+
+$headingFont: 'Ubuntu Mono',
+SFMono-Regular,
+Menlo,
+Monaco,
+Consolas,
+"Liberation Mono",
+"Courier New",
+monospace;
+
+body,
+html {
+    // التخلص من المساحة الفارغة من المتصفح
+    margin: 0;
+    // وضع أبعاد الصفحة
+    height: auto;
+    width: calc(100vw - 17px);
+    // اخفاء أي محتويات تخرج عن محتوي الصفحة بالعرض
+
+    // تخديد لون خلفية الصفحة
+    background: $bodyColor;
+    //تحديد نوع الخط
+    font-family: $bodyFont;
+    // تخديد المسافة بين الحرف و الحرف بالطول
+    line-height: 1.43;
+    font-weight: 500;
+}
+form {
+    width: calc(100vw - 17px);
+}
+
+.site__container {
+    // عمل مواقع للصفحة الاساسية
+    display: grid;
+    //عمل هيكلة الصفحة مع وضع أبعاد كل موقع 
+    grid-template-areas:
+        "Header Header"
+        "SideNav Landing"
+        "SideNav Content"
+        "SideNav Footer";
+    grid-template-rows: 5em 40vh 1fr 16em;
+    grid-template-columns: 3.5em 1fr;
+    min-height: 100vh;
+    width: calc(100vw - 17px);
+    max-width: calc(100vw - 17px);
+}
+
+.header {
+    grid-area: Header;
+    display: grid;
+    grid-template:
+        "Toggle Brand Search Profile"/ 3.5em 0.4fr 1fr 0.4fr;
+    width: 100%;
+    height: 5em;
+    background: $bodyColor;
+    place-items: center;
+    box-shadow: shadow(regular);
+
+    &--top {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+
+    &__button {
+        grid-area: Toggle;
+        border: none;
+        box-shadow: none;
+        background: none;
+    }
+
+    &__svg {
+        width: 100%;
+    }
+
+    &__brand {
+        grid-area: Brand;
+        background: $bodyGradient;
+        color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;
+        font-family: $headingFont;
+        font-size: 2rem;
+
+        &:hover {
+            color: transparent;
+        }
+    }
+
+    &__searchContainer {
+        grid-area: Search;
+        width: 60%;
+        height: 50%;
+        position: relative;
+    }
+
+    &__searchInput {
+        border-color: color(secondary, extratrans);
+        width: 100%;
+        height: 100%;
+        padding-left: 1em;
+        border-radius: 1.2em;
+        &::placeholder {
+            color: color(secondary, trans);
+        }
+
+        &:focus {
+            color: color(secondary, base);
+            border-color: color(primary, base);
+            box-shadow: 0 0 3px .1rem rgba(255, 105, 1, 0.4);
+        }
+    }
+
+    &__searchIcon {
+        width: 1.2em;
+    }
+
+    &__svg--small {
+        width: 100%;
+        height: 100%;
+        opacity: 0.5;
+        transition: opacity 0.15s ease-in-out;
+
+        &:hover {
+            filter: contrast(150%);
+            opacity: 1;
+        }
+    }
+
+    &__searchIcon--middle-right {
+        position: absolute;
+        top: 50%;
+        right: 1em;
+        transform: translateY(-55%);
+    }
+
+    &__items {
+        grid-area: Profile;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 2em;
+        list-style: none;
+        text-transform: uppercase;
+        margin: 0;
+    }
+
+    &__item {
+        padding-right: 1em;
+    }
+
+    &__item--last {
+        padding-right: 0;
+        color: color(secondary, base);
+        font-size: 0.9em;
+        font-weight: 500;
+    }
+
+    &__anchor {
+        font-weight: bold;
+
+        &:hover {
+            color: color(secondary, base);
+        }
+    }
+}
+
+.sidenav {
+    grid-area: SideNav;
+    display: flex;
+    width: 3.54em;
+    height: calc(100vh - (5em));
+    background-image: radial-gradient(circle at top 3rem left 3rem, rgba(239, 11, 121, 1), rgba(252, 29, 96, 1), rgba(255, 56, 73, 1), rgba(255, 81, 46, 1), rgba(255, 106, 0, 1));
+    background-position: center;
+    background-size: 200%;
+    box-shadow: shadow(regular);
+    list-style: none;
+    padding: 1em 0;
+
+    &--left {
+        position: fixed;
+        top: 5em;
+        z-index: 999;
+    }
+
+    &--vertical {
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__item {
+        padding-top: 4em;
+    }
+
+    &__item--last {
+        padding-top: 4em;
+        padding-bottom: 4em;
+    }
+
+    &__svg {
+        width: 2em;
+            & path {
+                fill: white;
+            }
+    }
+}
+
+.landing {
+    grid-area: Landing;
+    width: calc(100vw - (3.5em + 17px));
+    height: 40vh;
+    background: url('img/LandingBackground.png');
+    background-position: center top;
+    background-size: cover;
+    overflow: hidden;
+    &__overlay {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        background-image: radial-gradient(circle at top 3rem left 3rem, rgba(239, 11, 121, 0.7), rgba(252, 29, 96, 0.7), rgba(255, 56, 73, 0.7), rgba(255, 81, 46, 0.7), rgba(255, 106, 0, 0.7));
+    }
+
+    &__heading {
+        max-width: 60%;
+        text-transform: uppercase;
+        color: white;
+        text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1), 1px 1px 1px rgba(0, 0, 0, 0.5);
+        font-weight: bold;
+        font-size: 1.9em;
+        line-height: 1.45;
+        text-align: center;
+        font-family: $headingFont;
+    }
+
+    &__button--bottom-right {
+        position: absolute;
+        right: 2%;
+        bottom: 5%;
+        font-size: 1em;
+    }
+}
+
+
+.footer {
+    grid-area: Footer;
+    width: calc(100vw - (3.5em + 17px));
+    height: 16em;
+    background-image: url(img/FooterBackground.png);
+    background-position: center;
+    margin-top: 5em;
+    &__overlay {
+        padding-top: 1em;
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+        background-image: radial-gradient(circle at top 3rem right 3rem, rgba(239, 11, 121, 0.7), rgba(252, 29, 96, 0.7), rgba(255, 56, 73, 0.7), rgba(255, 81, 46, 0.7), rgba(255, 106, 0, 0.7));;
+        display: grid;
+        place-items: center;
+        grid-template: "leftLine footerBrand rightLine" max-content "leftItems socialMedia rightItems" max-content / 0.6fr auto 0.6fr;
+        }
+    &__line {
+        border: 2px solid white !important;
+        box-shadow: shadow(large);
+        border-radius: 100px;
+        width: 90%;
+
+        &--right {
+            grid-area: rightLine;
+        }
+
+        &--left {
+            grid-area: leftLine;
+        }
+    }
+
+    &__brand {
+        background: linear-gradient(to left bottom, #ee0b77, #fb1d61, #ff3749, #ff502f, #ff6901);
+        color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;
+        font-size: 3rem;
+        font-weight: 700;
+        text-shadow: #fff -2px -1px 1px;
+        &--middle {
+            grid-area: footerBrand;
+        }
+    }
+    &__items {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        font-size: 1.4em;
+        color: rgba(255, 255, 255, 1);
+        opacity: 0.5;
+        font-weight: bold;
+        padding-top: 0.5em;
+        &--right {
+            grid-area: rightItems;
+        }
+        &--left {
+            grid-area: leftItems;
+        }
+        &--middle {
+            grid-area: socialMedia;
+        }
+    }
+    &__item {
+        padding-bottom: 1em;
+        &--last {
+            padding-bottom: 0;
+        }
+    }
+}
+
+// Default.aspx
+
+.videos {
+    grid-area: Content;
+    display: grid;
+    grid-template: "NewVideos"1fr "PopularVideos"1fr / 1fr;
+    width: calc(100vw - (3.5em + 17px));
+    padding: 0 2em;
+    margin: 0 auto;
+    &__newVideos {
+        grid-area: NewVideos;
+        width: 100%;
+        display: grid;
+        grid-template:
+        "Divider . . ." auto 
+        "Caption . . ." auto
+        "Video1 Video2 Video3 Video4" 1fr
+        "Video5 Video6 Video7 Video8" 1fr / 1fr 1fr 1fr 1fr;
+        grid-gap: 1em;
+    }
+    &__popularVideos {
+        grid-area: PopularVideos;
+        width: 100%;
+        display: grid;
+        grid-template:
+        "Divider . . ." auto 
+        "Caption . . ." auto
+        "Video1 Video2 Video3 Video4" 1fr
+        "Video5 Video6 Video7 Video8" 1fr / 1fr 1fr 1fr 1fr;
+        grid-gap: 1em;
+    }
+    &__divider {
+        grid-area: Divider;
+        grid-column: span 4;
+        margin-top: 3em;
+        border:1px solid rgba(238, 11, 119, 1);
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    }
+    &__caption {
+        background: $bodyGradient;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        font-weight: bold;
+        font-size: 1.5em;
+        &--container {
+            grid-area: Caption;
+            grid-column: span 4;
+        }
+    }
+    &__cards {
+        display: grid;
+        grid-template: 
+        "Thumb" auto
+        "Info" 1fr / 1fr;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
+
+        @extend .embed-responsive, .embed-responsive-16by9;
+    }
+    &__thumb {
+        grid-area: Thumb;
+        object-fit: cover;
+        object-position: center;
+        @extend .embed-responsive-item;
+    }
+    &__info {
+        font-size: 1em;
+        display: flex;
+        flex-direction: column;
+        color: rgba(75, 69, 69, 0.89);
+        padding: 0.5em;
+        box-shadow: shadow(large);
+
+    }
+    &__title {
+        font-size: 1.1em;
+                color: rgb(37, 37, 37);
+        padding-bottom: 0.5em;
+        font-weight: 700;
+        flex: 2;
+    }
+    &__stats {
+        display: grid;
+        grid-template: "Views Date" 1fr / 1fr 1fr;
+    }
+    &__views {
+        grid-area: Views;
+    }
+    &__date {
+        grid-area: Date;
+        text-align: right;
+    }
+}
+
+.global__button {
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 0.4em 1.2em;
+    border: 1px solid color(secondary, trans);
+    background: $bodyGradient;
+    color: white;
+    font-size: 1em;
+    border-radius: 1em;
+    box-shadow: 0 1px 5px 0.1rem color(secondary, extratrans);
+    transition: box-shadow 0.2s ease-in-out;
+
+    &:focus {
+        box-shadow: 0 1px 5px 0.1rem color(primary, extratrans);
+    }
+
+    &:hover {
+        text-decoration: none;
+        color: white;
+        box-shadow: 0 1px 5px 0.1rem color(primary, extratrans);
+    }
+}
+
+.global__input {
+    @extend .form-control;
+    color: color(secondary, trans);
+    text-align: left;
+    transition: color 0.15s ease-in, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+a {
+    text-decoration: none;
+    color: unset;
+
+    &:hover {
+        text-decoration: none;
+    }
+}

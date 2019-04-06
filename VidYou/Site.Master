@@ -1,0 +1,149 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="VidYou.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - VidYou</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <asp:ContentPlaceHolder ID="HeaderStyle" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web"
+                    Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web"
+                    Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web"
+                    Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+        <div class="site__container">
+            <div class="header header--top">
+                <button type="button" class="header__button" runat="server">
+                    <img runat="server" class="header__svg" src="~/Content/img/Nav Toggle--Maximize.svg" />
+                </button>
+                <a runat="server" href="~/" class="header__brand">VIDYOUS</a>
+                <div class="header__searchContainer">
+                    <input type="text" placeholder="Search for a video.." name="Search for a video" id="" class="header__searchInput global__input">
+                    <a class="header__searchIcon header__searchIcon--middle-right" runat="server">
+                        <img runat="server" class="header__svg--small" src="~/Content/img/search.svg" alt="">
+                    </a>
+                </div>
+                <asp:LoginView runat="server" ViewStateMode="Disabled">
+                    <AnonymousTemplate>
+                        <ul class="header__items">
+                            <li class="header__item">
+                                <a runat="server" href="Account/Register"
+                                    class="header__anchor global__button">Register</a>
+                            </li>
+                            <li class="header__item header__item--last">
+                                <a runat="server" href="Account/Login" class="header__anchor">Log in</a>
+                            </li>
+                        </ul>
+                    </AnonymousTemplate>
+                    <LoggedInTemplate>
+                        <ul class="header__items">
+                            <li class="header__item header__item--profilePicture"></li>
+                            <li class="header__item"><a href="~/Account/Profile"
+                                    class="header__item--profile"><%: Context.User.Identity.GetUserName()  %></a></li>
+                            <li class="header__item header__item--last">
+                                <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off"
+                                    LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut"
+                                    CssClass="header__item--loggingout" />
+                            </li>
+                        </ul>
+                    </LoggedInTemplate>
+                </asp:LoginView>
+            </div>
+            <ul class="sidenav sidenav--left sidenav--vertical">
+                <li class="sidenav__item">
+                    <a runat="server" href="~/">
+                        <img runat="server" src="~/Content/img/home.svg" alt="Home Page" class="sidenav__svg">
+                    </a>
+                </li>
+                <li class="sidenav__item"><a runat="server" href=""><img runat="server" src="~/Content/img/profile.svg"
+                            alt="Your Profile" class="sidenav__svg"></a></li>
+                <li class="sidenav__item"><a runat="server" href=""><img runat="server"
+                            src="~/Content/img/upload-solid.svg" alt="Upload" class="sidenav__svg"></a></li>
+                <li class="sidenav__item"><a runat="server" href=""><img runat="server"
+                            src="~/Content/img/recent-solid.svg" alt="Recent Videos" class="sidenav__svg"></a></li>
+                <li class="sidenav__item sidenav__item--last"><a runat="server" href=""><img runat="server"
+                            src="~/Content/img/trending.svg" alt="Trending Videos" class="sidenav__svg"></a></li>
+            </ul>
+            <asp:LoginView runat="server" ViewStateMode="Disabled">
+                <AnonymousTemplate>
+                    <div class="landing">
+                        <div class="landing__overlay">
+                            <h1 class="landing__heading">
+                                You're about to see art in its truest form.
+                                This is a beautiful way of expressing what is
+                                only possible due to human ingenuity
+                            </h1>
+                            <a runat="server" href="~/Account/Register"
+                                class="landing__button--bottom-right global__button">Upload Now</a>
+                        </div>
+                    </div>
+                </AnonymousTemplate>
+                <LoggedInTemplate>
+                </LoggedInTemplate>
+            </asp:LoginView>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <div class="footer">
+                <div class="footer__overlay">
+                    <hr class="footer__line footer__line--right">
+                    <hr class="footer__line footer__line--left">
+                    <h1 class="footer__brand footer__brand--middle">
+                        VIDYOUS
+                    </h1>
+                    <ul class="footer__items footer__items--left">
+                        <li class="footer__item">Licences</li>
+                        <li class="footer__item">Contact</li>
+                        <li class="footer__item footer__item--last">About</li>
+                    </ul>
+                    <ul class="footer__items footer__items--right">
+                        <li class="footer__item">Terms of use</li>
+                        <li class="footer__item">People Involved</li>
+                        <li class="footer__item footer__item--last">Privacy</li>
+                    </ul>
+                    <ul class="footer__items footer__items--middle">
+                        <li class="footer__item">F</li>
+                        <li class="footer__item">T</li>
+                        <li class="footer__item footer__item--last">L</li>
+                    </ul>
+                </div>
+            </div>
+            <%--<p>&copy; <%: DateTime.Now.Year %> - Syncfusion ASP.NET Application</p>
+            </footer>--%>
+        </div>
+    </form>
+</body>
+
+</html>
