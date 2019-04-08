@@ -26,6 +26,7 @@
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <%--Framework Scripts--%>
+
                 <asp:ScriptReference Name="MsAjaxBundle" />
                 <asp:ScriptReference Name="jquery" />
                 <asp:ScriptReference Name="bootstrap" />
@@ -51,7 +52,8 @@
                 </button>
                 <a runat="server" href="~/" class="header__brand">VIDYOUS</a>
                 <div class="header__searchContainer">
-                    <input type="text" placeholder="Search for a video.." name="Search for a video" id="" class="header__searchInput global__input">
+                    <input type="text" placeholder="Search for a video.." name="Search for a video" id=""
+                        class="header__searchInput global__input">
                     <a class="header__searchIcon header__searchIcon--middle-right" runat="server">
                         <img runat="server" class="header__svg--small" src="~/Content/img/search.svg" alt="">
                     </a>
@@ -72,7 +74,8 @@
                         <ul class="header__items">
                             <li class="header__item header__item--profilePicture"></li>
                             <li class="header__item"><a href="~/Account/Profile"
-                                class="header__item--profile"><%: Context.User.Identity.GetUserName()  %></a></li>
+                                class="header__item--profile"><%: Context.User.Identity.GetUserName()  %></a>
+                            </li>
                             <li class="header__item header__item--last">
                                 <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off"
                                     LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut"
@@ -93,13 +96,16 @@
                         alt="Your Profile" class="sidenav__svg"></a></li>
                 <li class="sidenav__item"><a runat="server" href="">
                     <img runat="server"
-                        src="~/Content/img/upload-solid.svg" alt="Upload" class="sidenav__svg"></a></li>
+                        src="~/Content/img/upload-solid.svg" alt="Upload" class="sidenav__svg"></a>
+                </li>
                 <li class="sidenav__item"><a runat="server" href="">
                     <img runat="server"
-                        src="~/Content/img/recent-solid.svg" alt="Recent Videos" class="sidenav__svg"></a></li>
+                        src="~/Content/img/recent-solid.svg" alt="Recent Videos" class="sidenav__svg"></a>
+                </li>
                 <li class="sidenav__item sidenav__item--last"><a runat="server" href="">
                     <img runat="server"
-                        src="~/Content/img/trending.svg" alt="Trending Videos" class="sidenav__svg"></a></li>
+                        src="~/Content/img/trending.svg" alt="Trending Videos" class="sidenav__svg"></a>
+                </li>
             </ul>
             <asp:LoginView runat="server" ViewStateMode="Disabled">
                 <AnonymousTemplate>
@@ -126,28 +132,32 @@
                     <h1 class="footer__brand footer__brand--middle">VIDYOUS
                     </h1>
                     <ul class="footer__items footer__items--left">
-                        <li class="footer__item"><a>Licences</a></li>
-                        <li class="footer__item"><a>Contact</a></li>
-                        <li class="footer__item footer__item--last"><a>About</a></li>
+                        <li class="footer__item"><a runat="server" class="footer__anchor" href="#">Licences</a></li>
+                        <li class="footer__item"><a runat="server" class="footer__anchor" href="#">Contact</a></li>
+                        <li class="footer__item footer__item--last"><a runat="server" class="footer__anchor" href="#">About</a>
+                        </li>
                     </ul>
                     <ul class="footer__items footer__items--right">
-                        <li class="footer__item"><a>Terms of use</a></li>
-                        <li class="footer__item"><a>People Involved</a></li>
-                        <li class="footer__item footer__item--last"><a>Privacy & Policy</a></li>
+                        <li class="footer__item"><a runat="server" class="footer__anchor" href="#">Terms of use</a></li>
+                        <li class="footer__item"><a runat="server" class="footer__anchor" href="#">People Involved</a></li>
+                        <li class="footer__item footer__item--last"><a runat="server" class="footer__anchor" href="#">Privacy
+                            & Policy</a></li>
                     </ul>
                     <ul class="footer__items footer__items--middle">
                         <li class="footer__item footer__item--middle">
-                            <a>
-                                <img src="Content/img/facebook-square-brands.svg" class="footer__svg" />
+                            <a runat="server" class="footer__anchor" href="#">
+                                <img runat="server" src="~/Content/img/facebook-square-brands.svg" class="footer__svg" />
                             </a>
                         </li>
-                        <li class="footer__item footer__item--middle"><a>
-                            <img src="Content/img/twitter-square-brands.svg" class="footer__svg" />
-                        </a>
+                        <li class="footer__item footer__item--middle">
+                            <a runat="server" class="footer__anchor" href="#">
+                                <img runat="server" src="~/Content/img/twitter-square-brands.svg" class="footer__svg" />
+                            </a>
                         </li>
-                        <li class="footer__item footer__item--middle footer__item--last"><a>
-                            <img src="Content/img/linkedin-brands.svg" class="footer__svg" />
-                        </a>
+                        <li class="footer__item footer__item--middle footer__item--last">
+                            <a runat="server" class="footer__anchor" href="#">
+                                <img runat="server" src="~/Content/img/linkedin-brands.svg" class="footer__svg" />
+                            </a>
                         </li>
                     </ul>
                 </div>

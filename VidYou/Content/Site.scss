@@ -7,11 +7,13 @@ $shadows: (large: 0 1rem 3rem rgba(0, 0, 0, .175), regular: 0 .5rem 1rem rgba(0,
 $colors: (primary: (base: rgba(255, 105, 1, 1), light: lighten(rgba(255, 105, 1, 1), 15%), dark: darken(rgba(255, 105, 1, 1), 15%), trans: transparentize(rgba(255, 105, 1, 1), 0.5), extratrans: transparentize(rgba(255, 105, 1, 1), 0.8)), secondary: (base: rgba(238, 11, 119, 1), light: lighten(rgba(238, 11, 119, 1), 15%), dark: darken(rgba(238, 11, 119, 1), 15%), trans: transparentize(rgba(238, 11, 119, 1), 0.5), extratrans: transparentize(rgba(238, 11, 119, 1), 0.8)));
 
 
-@function color($color-name, $color-variant) {
+@function color($color-name, $color-variant)
+{
     @return map-get(map-get($colors, $color-name), $color-variant);
 }
 
-@function shadow($shadow-name) {
+@function shadow($shadow-name)
+{
     @return map-get($shadows, $shadow-name);
 }
 
@@ -20,7 +22,8 @@ $bodyRadialGradient: radial-gradient(circle at top 3rem left 3rem, rgba(239, 11,
 // جعل كل عنصر في الصفحة ينتهي محتواه عند حَده بدلاً من خارج حافته
 *,
 *::before,
-*::after {
+*::after
+{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -32,49 +35,61 @@ $headingFont: 'Ubuntu Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberatio
 
 
 
-:root {
+:root
+{
     --bodyWidth: calc(100vw - var(--browserScroll));
     --sidenav--width: 3.5em;
     --sidenav--height: calc(100vh - var(--header--height));
     --header--height: 5em;
-    --browserScroll: 17px;
+    --browserScroll: 0;
     --landing--width: calc(100vw - (var(--sidenav---width) + var(--browserScroll)));
     --landing--height: 40vh;
     --footer--height: max-content;
 }
 
-@mixin for-phone-only {
-    @media (max-width: 599px) {
+@mixin for-phone-only
+{
+    @media (max-width: 599px)
+    {
         @content;
     }
 }
 
-@mixin for-tablet-portrait-up {
-    @media (min-width: 600px) {
+@mixin for-tablet-portrait-up
+{
+    @media (min-width: 600px)
+    {
         @content;
     }
 }
 
-@mixin for-tablet-landscape-up {
-    @media (min-width: 900px) {
+@mixin for-tablet-landscape-up
+{
+    @media (min-width: 900px)
+    {
         @content;
     }
 }
 
-@mixin for-desktop-up {
-    @media (min-width: 1200px) {
+@mixin for-desktop-up
+{
+    @media (min-width: 1200px)
+    {
         @content;
     }
 }
 
-@mixin for-big-desktop-up {
-    @media (min-width: 1800px) {
+@mixin for-big-desktop-up
+{
+    @media (min-width: 1800px)
+    {
         @content;
     }
 }
 
 body,
-html {
+html
+{
     // التخلص من المساحة الفارغة من المتصفح
     margin: 0;
     // وضع أبعاد الصفحة
@@ -90,11 +105,13 @@ html {
     font-weight: 500;
 }
 
-form {
+form
+{
     width: var(--bodyWidth);
 }
 
-.site__container {
+.site__container
+{
     // عمل مواقع للصفحة الاساسية
     display: grid;
     //عمل هيكلة الصفحة مع وضع أبعاد كل موقع
@@ -107,7 +124,8 @@ form {
 
 
 
-.header {
+.header
+{
     grid-area: Header;
     display: grid;
     grid-template: "Toggle Brand Search Profile"/ var(--sidenav--width) 0.5fr 1fr 0.5fr;
@@ -115,15 +133,17 @@ form {
     height: var(--header--height);
     background: $bodyColor;
     place-items: center;
-    box-shadow: shadow(regular);
+	box-shadow: shadow(small);
 
-    &--top {
+    &--top
+    {
         position: sticky;
         top: 0;
         z-index: 1000;
     }
 
-    &__button {
+    &__button
+    {
         grid-area: Toggle;
         border: none;
         box-shadow: none;
@@ -132,28 +152,33 @@ form {
         justify-content: center;
     }
 
-    &__svg {
+    &__svg
+    {
         width: 100%;
 
-        @include for-phone-only {
+        @include for-phone-only
+        {
             width: 60%;
         }
     }
 
-    &__svg--small {
+    &__svg--small
+    {
         width: 100%;
         height: 100%;
         opacity: 0.5;
         transition: opacity 0.15s ease-in-out;
 
-        &:hover {
+        &:hover
+        {
             filter: contrast(150%);
             opacity: 1;
         }
     }
 
 
-    &__brand {
+    &__brand
+    {
         grid-area: Brand;
         background: $bodyGradient;
         color: transparent;
@@ -162,74 +187,88 @@ form {
         font-family: $headingFont;
         font-size: 2rem;
 
-        @include for-phone-only {
+        @include for-phone-only
+        {
             font-size: 1.2rem;
         }
 
-        &:hover {
+        &:hover
+        {
             color: transparent;
         }
     }
 
-    &__searchContainer {
+    &__searchContainer
+    {
         grid-area: Search;
-        width: 60%;
+        width: 80%;
         height: 50%;
         position: relative;
 
-        @include for-phone-only {
+        @include for-phone-only
+        {
             width: 95%;
             height: 40%;
         }
     }
 
-    &__searchInput {
-        border-color: color(secondary, extratrans);
+    &__searchInput
+    {
         width: 100%;
         height: 100%;
         padding-left: 1em;
         border-radius: 1.2em;
+        border-color: color(secondary, extratrans);
 
-        @include for-phone-only {
+        @include for-phone-only
+        {
             padding-left: 0.5em;
             font-size: 0.6rem
         }
 
-        &::placeholder {
+        &::placeholder
+        {
             color: color(secondary, trans);
 
-            @include for-phone-only {
+            @include for-phone-only
+            {
                 font-size: 0.6rem
             }
         }
 
-        &:focus {
+        &:focus
+        {
             color: color(secondary, base);
             border-color: color(primary, base);
             box-shadow: 0 0 3px .1rem rgba(255, 105, 1, 0.4);
 
-            @include for-phone-only {
-                font-size: 0.6rem; 
+            @include for-phone-only
+            {
+                font-size: 0.6rem;
                 box-shadow: 0 0 2px .05rem rgba(255, 105, 1, 0.4);
             }
         }
     }
 
-    &__searchIcon {
+    &__searchIcon
+    {
         width: 1.2em;
 
-        @include for-phone-only {
+        @include for-phone-only
+        {
             width: 0.7rem;
         }
     }
 
-    &__searchIcon--middle-right {
+    &__searchIcon--middle-right
+    {
         position: absolute;
         top: 50%;
         right: 1em;
         transform: translateY(-55%);
 
-        @include for-phone-only {
+        @include for-phone-only
+        {
             right: 0.5em;
             transform: translateY(-60%);
         }
@@ -237,31 +276,36 @@ form {
 
 
 
-    &__items {
+    &__items
+    {
         grid-area: Profile;
         display: flex;
         justify-content: center;
         align-items: center;
         text-align: center;
-        padding: 0 2em;
+        padding: 0 1em;
         list-style: none;
         text-transform: uppercase;
         margin: 0;
 
-        @include for-phone-only {
+        @include for-phone-only
+        {
             padding: 0 1em;
         }
     }
 
-    &__item {
+    &__item
+    {
         padding-right: 1em;
 
-        @include for-phone-only {
+        @include for-phone-only
+        {
             padding-right: 0.5em;
         }
     }
 
-    &__item--last {
+    &__item--last
+    {
         display: block;
         padding-right: 0;
         color: color(secondary, base);
@@ -269,21 +313,25 @@ form {
         font-weight: 500;
         width: max-content;
 
-        @include for-phone-only {
+        @include for-phone-only
+        {
             font-size: 0.5em;
         }
     }
 
-    &__anchor {
+    &__anchor
+    {
         font-weight: bold;
 
-        &:hover, &:focus {
+        &:hover, &:focus
+        {
             color: color(secondary, base);
         }
     }
 }
 
-.sidenav {
+.sidenav
+{
     grid-area: SideNav;
     display: flex;
     width: var(--sidenav--width);
@@ -295,55 +343,66 @@ form {
     list-style: none;
     padding: 1em 0;
 
-    @include for-phone-only {
+    @include for-phone-only
+    {
         padding: 0.5em 0;
     }
 
-    &--left {
+    &--left
+    {
         position: fixed;
         left: 0;
         top: var(--header--height);
         z-index: 999;
     }
 
-    &--vertical {
+    &--vertical
+    {
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
     }
 
-    &__item {
+    &__item
+    {
         padding-top: 4em;
 
-        @include for-phone-only {
+        @include for-phone-only
+        {
             padding-top: 1em;
         }
     }
 
-    &__item--last {
+    &__item--last
+    {
         padding-top: 4em;
         padding-bottom: 4em;
 
-        @include for-phone-only {
+        @include for-phone-only
+        {
             padding-top: 1em;
             papdding-bottom: 1em;
         }
     }
 
-    &__svg {
+    &__svg
+    {
         width: 2em;
 
-        @include for-phone-only {
+        @include for-phone-only
+        {
             width: 1em;
         }
 
-        & path {
+        & path
+        {
             fill: white;
         }
     }
 }
 
-.landing {
+.landing
+{
     grid-area: Landing;
     width: var(--landing--width);
     height: var(--landing--height);
@@ -352,7 +411,8 @@ form {
     background-size: cover;
     overflow: hidden;
 
-    &__overlay {
+    &__overlay
+    {
         position: relative;
         display: flex;
         align-items: center;
@@ -362,7 +422,8 @@ form {
         background-image: radial-gradient(circle at top 3rem left 3rem, rgba(239, 11, 121, 0.7), rgba(252, 29, 96, 0.7), rgba(255, 56, 73, 0.7), rgba(255, 81, 46, 0.7), rgba(255, 106, 0, 0.7));
     }
 
-    &__heading {
+    &__heading
+    {
         max-width: 60%;
         text-transform: uppercase;
         color: white;
@@ -372,13 +433,16 @@ form {
         line-height: 1.45;
         text-align: center;
         font-family: $headingFont;
-        @include for-phone-only {
+
+        @include for-phone-only
+        {
             font-size: 0.8rem;
             max-width: 80%;
         }
     }
 
-    &__button--bottom-right {
+    &__button--bottom-right
+    {
         position: absolute;
         right: 2%;
         bottom: 5%;
@@ -387,7 +451,8 @@ form {
 }
 
 
-.footer {
+.footer
+{
     grid-area: Footer;
     width: var(--landing--width);
     height: var(--footer--height);
@@ -395,40 +460,50 @@ form {
     background-position: center;
     margin-top: var(--header--height);
 
-    &__overlay {
+    &__overlay
+    {
         padding-top: 1em;
         width: 100%;
         height: 100%;
         max-height: 100%;
-        background-image: radial-gradient(circle at top 3rem right 3rem, rgba(239, 11, 121, 0.7), rgba(252, 29, 96, 0.7), rgba(255, 56, 73, 0.7), rgba(255, 81, 46, 0.7), rgba(255, 106, 0, 0.7));;
+        background-image: radial-gradient(circle at top 3rem right 3rem, rgba(239, 11, 121, 0.7), rgba(252, 29, 96, 0.7), rgba(255, 56, 73, 0.7), rgba(255, 81, 46, 0.7), rgba(255, 106, 0, 0.7));
+        ;
         display: grid;
         place-items: center;
         grid-template: "leftLine footerBrand rightLine" max-content "leftItems socialMedia rightItems" max-content / 0.6fr auto 0.6fr;
-        @include for-phone-only {
+
+        @include for-phone-only
+        {
             padding-top: 0.5em;
         }
     }
 
-    &__line {
+    &__line
+    {
         border: 2px solid white !important;
         box-shadow: shadow(large);
         border-radius: 100px;
         width: 90%;
         margin: 0;
-        @include for-phone-only {
+
+        @include for-phone-only
+        {
             border: 1px solid white !important;
         }
 
-        &--right {
+        &--right
+        {
             grid-area: rightLine;
         }
 
-        &--left {
+        &--left
+        {
             grid-area: leftLine;
         }
     }
 
-    &__brand {
+    &__brand
+    {
         background: linear-gradient(to left bottom, #ee0b77, #fb1d61, #ff3749, #ff502f, #ff6901);
         color: transparent;
         background-clip: text;
@@ -437,16 +512,20 @@ form {
         font-weight: 700;
         text-shadow: #fff -2px -1px 1px;
         margin: 0;
-        @include for-phone-only {
+
+        @include for-phone-only
+        {
             font-size: 1.5rem;
         }
 
-        &--middle {
+        &--middle
+        {
             grid-area: footerBrand;
         }
     }
 
-    &__items {
+    &__items
+    {
         list-style: none;
         display: flex;
         flex-direction: column;
@@ -456,18 +535,24 @@ form {
         color: rgba(255, 255, 255, 1);
         opacity: 1;
         font-weight: bold;
-        @include for-phone-only {
+
+        @include for-phone-only
+        {
             font-size: 0.8rem;
         }
-        &--right {
+
+        &--right
+        {
             grid-area: rightItems;
         }
 
-        &--left {
+        &--left
+        {
             grid-area: leftItems;
         }
 
-        &--middle {
+        &--middle
+        {
             grid-area: socialMedia;
             display: flex;
             flex-direction: row;
@@ -476,34 +561,48 @@ form {
         }
     }
 
-    &__item {
+    &__item
+    {
         opacity: 0.5;
         transition: opacity 250ms ease-in-out;
         margin-bottom: 1em;
-        @include for-phone-only {
+
+        @include for-phone-only
+        {
             margin-bottom: 0.5em;
         }
-        &--middle {
+
+        &--middle
+        {
             margin-bottom: 0;
             margin-right: 1em;
-
         }
-        &--last {
+
+        &--last
+        {
             margin-bottom: 0;
             margin-right: 0;
         }
-        &:hover {
+
+        &:hover
+        {
             opacity: 1;
         }
     }
-    &__svg {
+    &__anchor {
+        color: white !important;
+    }
+
+    &__svg
+    {
         width: 1.6em;
     }
 }
 
-// Default.aspx
+/*#region Default.aspx */
 
-.videos {
+.videos
+{
     grid-area: Content;
     display: grid;
     grid-template: "NewVideos"1fr "PopularVideos"1fr / 1fr;
@@ -511,18 +610,21 @@ form {
     padding: 0 2em;
     margin: 0 auto;
 
-    @include for-phone-only {
+    @include for-phone-only
+    {
         padding: 0 1em;
     }
 
-    &__newVideos {
+    &__newVideos
+    {
         grid-area: NewVideos;
         width: 100%;
         display: grid;
         grid-template: "Divider Divider Divider Divider" auto "Caption Caption Caption Caption" auto "Video1 Video2 Video3 Video4" 1fr "Video5 Video6 Video7 Video8" 1fr / 1fr 1fr 1fr 1fr;
         grid-gap: 1em;
 
-        @include for-phone-only {
+        @include for-phone-only
+        {
             grid-template: "Divider ." auto "Caption ." auto "Video1 Video2" 1fr "Video3 Video4" 1fr "Video5 Video6" 1fr "Video7 Video8" 1fr / 1fr 1fr;
             grid-template-areas: "Divider Divider" "Caption Caption" "Video1 Video2" "Video3 Video4" "Video5 Video6" "Video7 Video8";
             grid-template-columns: repeat(2, 1fr);
@@ -530,30 +632,35 @@ form {
         }
     }
 
-    &__popularVideos {
+    &__popularVideos
+    {
         grid-area: PopularVideos;
         width: 100%;
         display: grid;
         grid-template: "Divider Divider Divider Divider" auto "Caption Caption Caption Caption" auto "Video1 Video2 Video3 Video4" 1fr "Video5 Video6 Video7 Video8" 1fr / 1fr 1fr 1fr 1fr;
         grid-gap: 1em;
 
-        @include for-phone-only {
+        @include for-phone-only
+        {
             grid-template: "Divider Divider" auto "Caption Caption" auto "Video1 Video2" 1fr "Video3 Video4" 1fr "Video5 Video6" 1fr "Video7 Video8" 1fr / 1fr 1fr;
         }
     }
 
-    &__divider {
+    &__divider
+    {
         grid-area: Divider;
         margin-top: 1em;
         margin-bottom: 0;
         border: 1px solid rgba(238, 11, 119, 1);
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 
-        @include for-phone-only {
+        @include for-phone-only
+        {
         }
     }
 
-    &__caption {
+    &__caption
+    {
         background: $bodyGradient;
         background-clip: text;
         -webkit-background-clip: text;
@@ -562,30 +669,35 @@ form {
         font-size: 1.5em;
 
 
-        @include for-phone-only {
+        @include for-phone-only
+        {
             font-size: 1rem;
         }
 
-        &--container {
+        &--container
+        {
             grid-area: Caption;
         }
     }
 
-    &__cards {
+    &__cards
+    {
         display: grid;
         grid-template: "Thumb" max-content "Info" max-content / 1fr;
 
         @extend .embed-responsive, .embed-responsive-16by9;
     }
 
-    &__thumb {
+    &__thumb
+    {
         grid-area: Thumb;
         object-fit: cover;
         object-position: center;
         @extend .embed-responsive-item;
     }
 
-    &__info {
+    &__info
+    {
         font-size: 0.8rem;
         display: flex;
         flex-direction: column;
@@ -593,7 +705,8 @@ form {
         padding-top: 0.25em;
     }
 
-    &__title {
+    &__title
+    {
         display: block;
         font-size: 0.9rem;
         color: rgb(37, 37, 37);
@@ -601,27 +714,317 @@ form {
         font-weight: 700;
         flex: 2;
 
-        @include for-phone-only {
+        @include for-phone-only
+        {
             font-size: 0.8rem;
         }
     }
 
-    &__stats {
+    &__stats
+    {
         display: grid;
         grid-template: "Views Date" 1fr / 1fr 1fr;
     }
 
-    &__views {
+    &__views
+    {
         grid-area: Views;
     }
 
-    &__date {
+    &__date
+    {
         grid-area: Date;
         text-align: right;
     }
 }
 
-.global__button {
+/*#endregion */
+
+/*#region Register.aspx */
+
+.register
+{
+	grid-area: Content;
+	display: grid;
+	grid-template: "Content Showcase" 1fr / 1fr 1fr;
+
+	&__showcase
+	{
+		clip-path: circle(92.0% at 100% 51%);
+		background: $bodyRadialGradient;
+		background-image: url('img/RegisterBackground.jpg');
+		background-size: cover;
+		grid-area: Showcase;
+	}
+
+	&__overlay
+	{
+		width: 100%;
+		height: 100%;
+		background-image: radial-gradient(circle at bottom 3rem left 3rem, rgba(239, 11, 121, 0.5), rgba(252, 29, 96, 0.5), rgba(255, 56, 73, 0.5), rgba(255, 81, 46, 0.5), rgba(255, 106, 0, 0.5));
+	}
+
+	&__divider
+	{
+		border: 1px solid rgba(238, 11, 119, 1);
+		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+	}
+
+	&__content
+	{
+		margin: 1.5em 2em;
+		grid-area: Content;
+	}
+
+	&__formGroup
+	{
+
+		@extend .form-group;
+	}
+
+	&__label
+	{
+
+		@extend .col-md-2, .control-label !optional;
+	}
+
+	&__inputContainer
+	{
+
+		@extend .col-md-10;
+	}
+
+	&__text
+	{
+
+		&--danger
+		{
+
+			@extend .text-danger;
+		}
+	}
+}
+
+/*#endregion */
+
+/*#region Login.aspx */
+
+.login
+{
+	grid-area: Content;
+	display: flex;
+	flex-direction: column-reverse
+;
+	justify-content: center;
+	grid-gap: 3em;
+	margin: 3em 3em;
+
+	@include for-phone-only
+	{
+		margin: 4em 1em;
+		grid-gap: 1em;
+	}
+
+	&__internal
+	{
+		grid-area: Internal;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	&__external
+	{
+		grid-area: External;
+	}
+
+	&__divider
+	{
+		border: 1px solid rgba(238, 11, 119, 1);
+		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+	}
+
+	&__content
+	{
+		margin: 1.5em 2em;
+		grid-area: Content;
+	}
+
+	&__formGroup
+	{
+
+		@extend .form-group;
+	}
+
+	&__label
+	{
+
+		@extend .col-md-2, .control-label !optional;
+	}
+
+	&__inputContainer
+	{
+
+		@extend .col-md-10;
+	}
+
+	&__text
+	{
+
+		&--danger
+		{
+
+			@extend .text-danger;
+		}
+	}
+}
+
+/*#endregion */
+
+/*#region Profile.aspx */
+
+.profile
+{
+	grid-area: Content;
+	display: grid;
+	grid-template: "Info" auto "Uploaded" max-content "Liked" max-content / 1fr;
+	margin-bottom: 5em;
+
+
+	&__info
+	{
+		position: relative;
+		background: url('img/RegisterBackground.jpg');
+		background-size: cover;
+		background-position: center;
+		height: 40vh;
+		width: var(--landing--width);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 10%;
+		position: relative;
+		&--wrap
+		{
+			position: absolute;
+			top: calc(100% - (var(--header--height) - 5em));
+			left: calc(50% - (var(--sidenav--width) - 5em));
+			transform: translate(-50%, -50%);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+		}
+	}
+
+	&__picture
+	{
+		&--img
+		{
+			width: 10em;
+			height: 10em;
+			border-radius: 11em;
+			object-fit: cover;
+		}
+	}
+
+	&__name
+	{
+		font-size: 2rem;
+		font-weight: bold;
+		display: inline-flex;
+	}
+}
+
+/*#endregion */
+
+/*#region Watch.aspx */
+
+.watch
+{
+	grid-area: Content;
+	display: grid;
+	grid-template: "Stream" 1fr "New" auto / 1fr;
+
+	&__stream
+	{
+		margin: 0 auto;
+		margin-top: 2em;
+		grid-area: Stream;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 2em;
+	}
+
+	&__video
+	{
+		width: 80%;
+		@include for-phone-only {
+			width: 90%;
+		}
+
+	}
+
+	&__info
+	{
+		width: 80%;
+		grid-area: Info;
+		display: grid;
+		grid-template: "Title Title" auto "Author Stats" auto "Memo Memo" auto / auto auto;
+		font-size: 0.9rem;
+		padding: 1em 0 0 0;
+		@include for-phone-only {
+			padding: 1em 0 0 0;
+			width: 90%;
+		}
+	}
+
+	&__title
+	{
+		font-weight: bold;
+		grid-area: Title;
+		margin-bottom: 1em;
+	}
+
+	&__author
+	{
+		grid-area: Author;
+		margin-bottom: 1em;
+	}
+
+	& h1
+	{
+		font-size: 1.7rem;
+		margin: 0;
+	}
+
+	&__stats
+	{
+		grid-area: Stats;
+		display: flex;
+		justify-content: space-around;
+	}
+
+	&__memo
+	{
+		grid-area: Memo;
+	}
+
+	&__likes
+	{
+	}
+
+	&__views
+	{
+	}
+}
+
+/*#endregion */
+
+.global__button
+{
     text-transform: uppercase;
     font-weight: bold;
     padding: 0.4em 1.2em;
@@ -634,48 +1037,74 @@ form {
     transition: box-shadow 0.2s ease-in-out;
     display: inline-flex;
 
-    @include for-phone-only {
+    @include for-phone-only
+    {
         font-size: 0.6em;
         box-shadow: 0 1px 3px 0.1rem color(secondary, extratrans);
     }
 
-    &:hover, &:focus {
+    &:hover, &:focus
+    {
         text-decoration: none;
         color: white;
         box-shadow: 0 1px 5px 0.1rem color(primary, extratrans);
 
-        @include for-phone-only {
+        @include for-phone-only
+        {
             box-shadow: 0 1px 3px 0.1rem color(primary, extratrans);
         }
     }
 }
 
-.global__input {
-    @extend .form-control;
-    color: color(secondary, trans);
-    text-align: left;
-    transition: color 0.15s ease-in, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+.global__input
+{
+	@extend .form-control;
+	color: color(secondary, trans);
+	text-align: left;
+	transition: color 0.15s ease-in, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	border-color: color(secondary, extratrans);
+
+	&::placeholder
+	{
+		color: color(secondary, trans);
+	}
+
+	&:focus
+	{
+		color: color(secondary, base);
+		border-color: color(primary, base);
+		box-shadow: 0 0 3px .1rem rgba(255, 105, 1, 0.4);
+
+		@include for-phone-only
+		{
+			box-shadow: 0 0 2px .05rem rgba(255, 105, 1, 0.4);
+		}
+	}
 }
 
-a {
-    text-decoration: none;
-    color: unset;
+	a
+	{
+		text-decoration: none;
+		color: unset;
 
-    &:hover {
-        text-decoration: none;
-    }
-}
+		&:hover
+		{
+			text-decoration: none;
+		}
+	}
 
 
-@media (max-width: 599px) {
-    :root {
-        --bodyWidth: calc(100vw - var(--browserScroll));
-        --sidenav--width: 2em;
-        --sidenav--height: calc(100vh - var(--header--height));
-        --header--height: 3em;
-        --browserScroll: 0;
-        --landing--width: calc(100vw - (var(--sidenav---width) + var(--browserScroll)));
-        --landing--height: 30vh;
-        --footer--height: max-content;
-    }
-}
+	@media (max-width: 599px)
+	{
+		:root
+		{
+			--bodyWidth: calc(100vw - var(--browserScroll));
+			--sidenav--width: 2em;
+			--sidenav--height: calc(100vh - var(--header--height));
+			--header--height: 3em;
+			--browserScroll: 0;
+			--landing--width: calc(100vw - (var(--sidenav---width) + var(--browserScroll)));
+			--landing--height: 30vh;
+			--footer--height: max-content;
+		}
+	}

@@ -15,7 +15,7 @@
 			<div class="videos__cards videos__cards--1">
 				<asp:ImageButton ID="videos__IB1" runat="server"
 					CssClass="videos__thumb videos__thumb--1 videos__thumb--IB" ImageUrl="~/Content/img/img1.jpg"
-					PostBackUrl="Videos" />
+					PostBackUrl="Watch" />
 				<div class="videos__info videos__info--1">
 
 					<strong class="videos__title videos__title--1">
