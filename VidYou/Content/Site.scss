@@ -1,21 +1,10 @@
-@import 'BootstrapSCSS/bootstrap';
+@import 'BootstrapSCSS/bootstrap.scss';
 @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono:700|Ubuntu:500,700');
 $bodyColor: #fff;
 
-$shadows: (large: 0 1rem 3rem rgba(0, 0, 0, .175),
-regular: 0 .5rem 1rem rgba(0, 0, 0, .15),
-small: 0 .125rem .25rem rgba(0, 0, 0, .075));
+$shadows: (large: 0 1rem 3rem rgba(0, 0, 0, .175), regular: 0 .5rem 1rem rgba(0, 0, 0, .15), small: 0 .125rem .25rem rgba(0, 0, 0, .075));
 
-$colors: (primary: (base: rgba(255, 105, 1, 1),
-light: lighten(rgba(255, 105, 1, 1), 15%),
-dark: darken(rgba(255, 105, 1, 1), 15%),
-trans: transparentize(rgba(255, 105, 1, 1), 0.5),
-extratrans: transparentize(rgba(255, 105, 1, 1), 0.8)),
-secondary: (base: rgba(238, 11, 119, 1),
-light: lighten(rgba(238, 11, 119, 1), 15%),
-dark: darken(rgba(238, 11, 119, 1), 15%),
-trans: transparentize(rgba(238, 11, 119, 1), 0.5),
-extratrans: transparentize(rgba(238, 11, 119, 1), 0.8)));
+$colors: (primary: (base: rgba(255, 105, 1, 1), light: lighten(rgba(255, 105, 1, 1), 15%), dark: darken(rgba(255, 105, 1, 1), 15%), trans: transparentize(rgba(255, 105, 1, 1), 0.5), extratrans: transparentize(rgba(255, 105, 1, 1), 0.8)), secondary: (base: rgba(238, 11, 119, 1), light: lighten(rgba(238, 11, 119, 1), 15%), dark: darken(rgba(238, 11, 119, 1), 15%), trans: transparentize(rgba(238, 11, 119, 1), 0.5), extratrans: transparentize(rgba(238, 11, 119, 1), 0.8)));
 
 
 @function color($color-name, $color-variant) {
@@ -37,26 +26,52 @@ $bodyRadialGradient: radial-gradient(circle at top 3rem left 3rem, rgba(239, 11,
     padding: 0;
 }
 
-$bodyFont: 'Ubuntu',
--apple-system,
-BlinkMacSystemFont,
-'Segoe UI',
-Roboto,
-Oxygen,
-Ubuntu,
-Cantarell,
-'Open Sans',
-'Helvetica Neue',
-sans-serif;
+$bodyFont: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
-$headingFont: 'Ubuntu Mono',
-SFMono-Regular,
-Menlo,
-Monaco,
-Consolas,
-"Liberation Mono",
-"Courier New",
-monospace;
+$headingFont: 'Ubuntu Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+
+
+:root {
+    --bodyWidth: calc(100vw - var(--browserScroll));
+    --sidenav--width: 3.5em;
+    --sidenav--height: calc(100vh - var(--header--height));
+    --header--height: 5em;
+    --browserScroll: 17px;
+    --landing--width: calc(100vw - (var(--sidenav---width) + var(--browserScroll)));
+    --landing--height: 40vh;
+    --footer--height: max-content;
+}
+
+@mixin for-phone-only {
+    @media (max-width: 599px) {
+        @content;
+    }
+}
+
+@mixin for-tablet-portrait-up {
+    @media (min-width: 600px) {
+        @content;
+    }
+}
+
+@mixin for-tablet-landscape-up {
+    @media (min-width: 900px) {
+        @content;
+    }
+}
+
+@mixin for-desktop-up {
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin for-big-desktop-up {
+    @media (min-width: 1800px) {
+        @content;
+    }
+}
 
 body,
 html {
@@ -64,9 +79,8 @@ html {
     margin: 0;
     // وضع أبعاد الصفحة
     height: auto;
-    width: calc(100vw - 17px);
+    width: var(--bodyWidth);
     // اخفاء أي محتويات تخرج عن محتوي الصفحة بالعرض
-
     // تخديد لون خلفية الصفحة
     background: $bodyColor;
     //تحديد نوع الخط
@@ -75,41 +89,37 @@ html {
     line-height: 1.43;
     font-weight: 500;
 }
+
 form {
-    width: calc(100vw - 17px);
+    width: var(--bodyWidth);
 }
 
 .site__container {
     // عمل مواقع للصفحة الاساسية
     display: grid;
-    //عمل هيكلة الصفحة مع وضع أبعاد كل موقع 
-    grid-template-areas:
-        "Header Header"
-        "SideNav Landing"
-        "SideNav Content"
-        "SideNav Footer";
-    grid-template-rows: 5em 40vh 1fr 16em;
-    grid-template-columns: 3.5em 1fr;
+    //عمل هيكلة الصفحة مع وضع أبعاد كل موقع
+    grid-template: "Header Header" var(--header--height) "SideNav Landing" var(--landing--height) "SideNav Content" 1fr "SideNav Footer" var(--footer--height) / var(--sidenav--width) 1fr;
     min-height: 100vh;
-    width: calc(100vw - 17px);
-    max-width: calc(100vw - 17px);
+    width: var(--bodyWidth);
+    max-width: var(--bodyWidth);
 }
+
+
+
 
 .header {
     grid-area: Header;
     display: grid;
-    grid-template:
-        "Toggle Brand Search Profile"/ 3.5em 0.4fr 1fr 0.4fr;
+    grid-template: "Toggle Brand Search Profile"/ var(--sidenav--width) 0.5fr 1fr 0.5fr;
     width: 100%;
-    height: 5em;
+    height: var(--header--height);
     background: $bodyColor;
     place-items: center;
     box-shadow: shadow(regular);
 
     &--top {
-        position: fixed;
+        position: sticky;
         top: 0;
-        left: 0;
         z-index: 1000;
     }
 
@@ -118,52 +128,16 @@ form {
         border: none;
         box-shadow: none;
         background: none;
+        display: inline-flex;
+        justify-content: center;
     }
 
     &__svg {
         width: 100%;
-    }
 
-    &__brand {
-        grid-area: Brand;
-        background: $bodyGradient;
-        color: transparent;
-        background-clip: text;
-        -webkit-background-clip: text;
-        font-family: $headingFont;
-        font-size: 2rem;
-
-        &:hover {
-            color: transparent;
+        @include for-phone-only {
+            width: 60%;
         }
-    }
-
-    &__searchContainer {
-        grid-area: Search;
-        width: 60%;
-        height: 50%;
-        position: relative;
-    }
-
-    &__searchInput {
-        border-color: color(secondary, extratrans);
-        width: 100%;
-        height: 100%;
-        padding-left: 1em;
-        border-radius: 1.2em;
-        &::placeholder {
-            color: color(secondary, trans);
-        }
-
-        &:focus {
-            color: color(secondary, base);
-            border-color: color(primary, base);
-            box-shadow: 0 0 3px .1rem rgba(255, 105, 1, 0.4);
-        }
-    }
-
-    &__searchIcon {
-        width: 1.2em;
     }
 
     &__svg--small {
@@ -178,12 +152,90 @@ form {
         }
     }
 
+
+    &__brand {
+        grid-area: Brand;
+        background: $bodyGradient;
+        color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;
+        font-family: $headingFont;
+        font-size: 2rem;
+
+        @include for-phone-only {
+            font-size: 1.2rem;
+        }
+
+        &:hover {
+            color: transparent;
+        }
+    }
+
+    &__searchContainer {
+        grid-area: Search;
+        width: 60%;
+        height: 50%;
+        position: relative;
+
+        @include for-phone-only {
+            width: 95%;
+            height: 40%;
+        }
+    }
+
+    &__searchInput {
+        border-color: color(secondary, extratrans);
+        width: 100%;
+        height: 100%;
+        padding-left: 1em;
+        border-radius: 1.2em;
+
+        @include for-phone-only {
+            padding-left: 0.5em;
+            font-size: 0.6rem
+        }
+
+        &::placeholder {
+            color: color(secondary, trans);
+
+            @include for-phone-only {
+                font-size: 0.6rem
+            }
+        }
+
+        &:focus {
+            color: color(secondary, base);
+            border-color: color(primary, base);
+            box-shadow: 0 0 3px .1rem rgba(255, 105, 1, 0.4);
+
+            @include for-phone-only {
+                font-size: 0.6rem; 
+                box-shadow: 0 0 2px .05rem rgba(255, 105, 1, 0.4);
+            }
+        }
+    }
+
+    &__searchIcon {
+        width: 1.2em;
+
+        @include for-phone-only {
+            width: 0.7rem;
+        }
+    }
+
     &__searchIcon--middle-right {
         position: absolute;
         top: 50%;
         right: 1em;
         transform: translateY(-55%);
+
+        @include for-phone-only {
+            right: 0.5em;
+            transform: translateY(-60%);
+        }
     }
+
+
 
     &__items {
         grid-area: Profile;
@@ -195,23 +247,37 @@ form {
         list-style: none;
         text-transform: uppercase;
         margin: 0;
+
+        @include for-phone-only {
+            padding: 0 1em;
+        }
     }
 
     &__item {
         padding-right: 1em;
+
+        @include for-phone-only {
+            padding-right: 0.5em;
+        }
     }
 
     &__item--last {
+        display: block;
         padding-right: 0;
         color: color(secondary, base);
         font-size: 0.9em;
         font-weight: 500;
+        width: max-content;
+
+        @include for-phone-only {
+            font-size: 0.5em;
+        }
     }
 
     &__anchor {
         font-weight: bold;
 
-        &:hover {
+        &:hover, &:focus {
             color: color(secondary, base);
         }
     }
@@ -220,8 +286,8 @@ form {
 .sidenav {
     grid-area: SideNav;
     display: flex;
-    width: 3.54em;
-    height: calc(100vh - (5em));
+    width: var(--sidenav--width);
+    height: var(--sidenav--height);
     background-image: radial-gradient(circle at top 3rem left 3rem, rgba(239, 11, 121, 1), rgba(252, 29, 96, 1), rgba(255, 56, 73, 1), rgba(255, 81, 46, 1), rgba(255, 106, 0, 1));
     background-position: center;
     background-size: 200%;
@@ -229,9 +295,14 @@ form {
     list-style: none;
     padding: 1em 0;
 
+    @include for-phone-only {
+        padding: 0.5em 0;
+    }
+
     &--left {
         position: fixed;
-        top: 5em;
+        left: 0;
+        top: var(--header--height);
         z-index: 999;
     }
 
@@ -243,29 +314,44 @@ form {
 
     &__item {
         padding-top: 4em;
+
+        @include for-phone-only {
+            padding-top: 1em;
+        }
     }
 
     &__item--last {
         padding-top: 4em;
         padding-bottom: 4em;
+
+        @include for-phone-only {
+            padding-top: 1em;
+            papdding-bottom: 1em;
+        }
     }
 
     &__svg {
         width: 2em;
-            & path {
-                fill: white;
-            }
+
+        @include for-phone-only {
+            width: 1em;
+        }
+
+        & path {
+            fill: white;
+        }
     }
 }
 
 .landing {
     grid-area: Landing;
-    width: calc(100vw - (3.5em + 17px));
-    height: 40vh;
+    width: var(--landing--width);
+    height: var(--landing--height);
     background: url('img/LandingBackground.png');
     background-position: center top;
     background-size: cover;
     overflow: hidden;
+
     &__overlay {
         position: relative;
         display: flex;
@@ -286,6 +372,10 @@ form {
         line-height: 1.45;
         text-align: center;
         font-family: $headingFont;
+        @include for-phone-only {
+            font-size: 0.8rem;
+            max-width: 80%;
+        }
     }
 
     &__button--bottom-right {
@@ -299,11 +389,12 @@ form {
 
 .footer {
     grid-area: Footer;
-    width: calc(100vw - (3.5em + 17px));
-    height: 16em;
+    width: var(--landing--width);
+    height: var(--footer--height);
     background-image: url(img/FooterBackground.png);
     background-position: center;
-    margin-top: 5em;
+    margin-top: var(--header--height);
+
     &__overlay {
         padding-top: 1em;
         width: 100%;
@@ -313,12 +404,20 @@ form {
         display: grid;
         place-items: center;
         grid-template: "leftLine footerBrand rightLine" max-content "leftItems socialMedia rightItems" max-content / 0.6fr auto 0.6fr;
+        @include for-phone-only {
+            padding-top: 0.5em;
         }
+    }
+
     &__line {
         border: 2px solid white !important;
         box-shadow: shadow(large);
         border-radius: 100px;
         width: 90%;
+        margin: 0;
+        @include for-phone-only {
+            border: 1px solid white !important;
+        }
 
         &--right {
             grid-area: rightLine;
@@ -337,10 +436,16 @@ form {
         font-size: 3rem;
         font-weight: 700;
         text-shadow: #fff -2px -1px 1px;
+        margin: 0;
+        @include for-phone-only {
+            font-size: 1.5rem;
+        }
+
         &--middle {
             grid-area: footerBrand;
         }
     }
+
     &__items {
         list-style: none;
         display: flex;
@@ -349,24 +454,50 @@ form {
         justify-content: start;
         font-size: 1.4em;
         color: rgba(255, 255, 255, 1);
-        opacity: 0.5;
+        opacity: 1;
         font-weight: bold;
-        padding-top: 0.5em;
+        @include for-phone-only {
+            font-size: 0.8rem;
+        }
         &--right {
             grid-area: rightItems;
         }
+
         &--left {
             grid-area: leftItems;
         }
+
         &--middle {
             grid-area: socialMedia;
+            display: flex;
+            flex-direction: row;
+            padding: 0;
+            margin: 0;
         }
     }
+
     &__item {
-        padding-bottom: 1em;
-        &--last {
-            padding-bottom: 0;
+        opacity: 0.5;
+        transition: opacity 250ms ease-in-out;
+        margin-bottom: 1em;
+        @include for-phone-only {
+            margin-bottom: 0.5em;
         }
+        &--middle {
+            margin-bottom: 0;
+            margin-right: 1em;
+
+        }
+        &--last {
+            margin-bottom: 0;
+            margin-right: 0;
+        }
+        &:hover {
+            opacity: 1;
+        }
+    }
+    &__svg {
+        width: 1.6em;
     }
 }
 
@@ -376,38 +507,52 @@ form {
     grid-area: Content;
     display: grid;
     grid-template: "NewVideos"1fr "PopularVideos"1fr / 1fr;
-    width: calc(100vw - (3.5em + 17px));
+    width: var(--landing--width);
     padding: 0 2em;
     margin: 0 auto;
+
+    @include for-phone-only {
+        padding: 0 1em;
+    }
+
     &__newVideos {
         grid-area: NewVideos;
         width: 100%;
         display: grid;
-        grid-template:
-        "Divider . . ." auto 
-        "Caption . . ." auto
-        "Video1 Video2 Video3 Video4" 1fr
-        "Video5 Video6 Video7 Video8" 1fr / 1fr 1fr 1fr 1fr;
+        grid-template: "Divider Divider Divider Divider" auto "Caption Caption Caption Caption" auto "Video1 Video2 Video3 Video4" 1fr "Video5 Video6 Video7 Video8" 1fr / 1fr 1fr 1fr 1fr;
         grid-gap: 1em;
+
+        @include for-phone-only {
+            grid-template: "Divider ." auto "Caption ." auto "Video1 Video2" 1fr "Video3 Video4" 1fr "Video5 Video6" 1fr "Video7 Video8" 1fr / 1fr 1fr;
+            grid-template-areas: "Divider Divider" "Caption Caption" "Video1 Video2" "Video3 Video4" "Video5 Video6" "Video7 Video8";
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto auto repeat(4, 1fr);
+        }
     }
+
     &__popularVideos {
         grid-area: PopularVideos;
         width: 100%;
         display: grid;
-        grid-template:
-        "Divider . . ." auto 
-        "Caption . . ." auto
-        "Video1 Video2 Video3 Video4" 1fr
-        "Video5 Video6 Video7 Video8" 1fr / 1fr 1fr 1fr 1fr;
+        grid-template: "Divider Divider Divider Divider" auto "Caption Caption Caption Caption" auto "Video1 Video2 Video3 Video4" 1fr "Video5 Video6 Video7 Video8" 1fr / 1fr 1fr 1fr 1fr;
         grid-gap: 1em;
+
+        @include for-phone-only {
+            grid-template: "Divider Divider" auto "Caption Caption" auto "Video1 Video2" 1fr "Video3 Video4" 1fr "Video5 Video6" 1fr "Video7 Video8" 1fr / 1fr 1fr;
+        }
     }
+
     &__divider {
         grid-area: Divider;
-        grid-column: span 4;
-        margin-top: 3em;
-        border:1px solid rgba(238, 11, 119, 1);
+        margin-top: 1em;
+        margin-bottom: 0;
+        border: 1px solid rgba(238, 11, 119, 1);
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+
+        @include for-phone-only {
+        }
     }
+
     &__caption {
         background: $bodyGradient;
         background-clip: text;
@@ -415,49 +560,61 @@ form {
         color: transparent;
         font-weight: bold;
         font-size: 1.5em;
+
+
+        @include for-phone-only {
+            font-size: 1rem;
+        }
+
         &--container {
             grid-area: Caption;
-            grid-column: span 4;
         }
     }
+
     &__cards {
         display: grid;
-        grid-template: 
-        "Thumb" auto
-        "Info" 1fr / 1fr;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
+        grid-template: "Thumb" max-content "Info" max-content / 1fr;
 
         @extend .embed-responsive, .embed-responsive-16by9;
     }
+
     &__thumb {
         grid-area: Thumb;
         object-fit: cover;
         object-position: center;
         @extend .embed-responsive-item;
     }
+
     &__info {
-        font-size: 1em;
+        font-size: 0.8rem;
         display: flex;
         flex-direction: column;
         color: rgba(75, 69, 69, 0.89);
-        padding: 0.5em;
-        box-shadow: shadow(large);
-
+        padding-top: 0.25em;
     }
+
     &__title {
-        font-size: 1.1em;
-                color: rgb(37, 37, 37);
+        display: block;
+        font-size: 0.9rem;
+        color: rgb(37, 37, 37);
         padding-bottom: 0.5em;
         font-weight: 700;
         flex: 2;
+
+        @include for-phone-only {
+            font-size: 0.8rem;
+        }
     }
+
     &__stats {
         display: grid;
         grid-template: "Views Date" 1fr / 1fr 1fr;
     }
+
     &__views {
         grid-area: Views;
     }
+
     &__date {
         grid-area: Date;
         text-align: right;
@@ -475,15 +632,21 @@ form {
     border-radius: 1em;
     box-shadow: 0 1px 5px 0.1rem color(secondary, extratrans);
     transition: box-shadow 0.2s ease-in-out;
+    display: inline-flex;
 
-    &:focus {
-        box-shadow: 0 1px 5px 0.1rem color(primary, extratrans);
+    @include for-phone-only {
+        font-size: 0.6em;
+        box-shadow: 0 1px 3px 0.1rem color(secondary, extratrans);
     }
 
-    &:hover {
+    &:hover, &:focus {
         text-decoration: none;
         color: white;
         box-shadow: 0 1px 5px 0.1rem color(primary, extratrans);
+
+        @include for-phone-only {
+            box-shadow: 0 1px 3px 0.1rem color(primary, extratrans);
+        }
     }
 }
 
@@ -500,5 +663,19 @@ a {
 
     &:hover {
         text-decoration: none;
+    }
+}
+
+
+@media (max-width: 599px) {
+    :root {
+        --bodyWidth: calc(100vw - var(--browserScroll));
+        --sidenav--width: 2em;
+        --sidenav--height: calc(100vh - var(--header--height));
+        --header--height: 3em;
+        --browserScroll: 0;
+        --landing--width: calc(100vw - (var(--sidenav---width) + var(--browserScroll)));
+        --landing--height: 30vh;
+        --footer--height: max-content;
     }
 }

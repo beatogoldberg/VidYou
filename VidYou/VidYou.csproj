@@ -166,6 +166,7 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Profile.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="App_Start\facebook-square-brands.svg" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -174,37 +175,65 @@
     <Content Include="Content\img\bars-solid.svg" />
     <Content Include="Content\img\Categories Icon.svg" />
     <Content Include="Content\img\Channels Icon.svg" />
+    <Content Include="Content\img\facebook-square-brands.svg" />
     <Content Include="Content\img\Facebook.svg" />
     <Content Include="Content\img\FooterBackground.png" />
     <Content Include="Content\img\google.svg" />
     <Content Include="Content\img\Help Icon.svg" />
     <Content Include="Content\img\Home Icon.svg" />
+    <Content Include="Content\img\home.svg" />
     <Content Include="Content\img\img1.jpeg" />
+    <Content Include="Content\img\img1.jpg" />
     <Content Include="Content\img\img10.jpeg" />
+    <Content Include="Content\img\img10.jpg" />
     <Content Include="Content\img\img11.jpeg" />
+    <Content Include="Content\img\img11.jpg" />
     <Content Include="Content\img\img12.jpeg" />
+    <Content Include="Content\img\img12.jpg" />
     <Content Include="Content\img\img13.jpeg" />
+    <Content Include="Content\img\img13.jpg" />
     <Content Include="Content\img\img14.jpeg" />
+    <Content Include="Content\img\img14.jpg" />
     <Content Include="Content\img\img15.jpeg" />
+    <Content Include="Content\img\img15.jpg" />
     <Content Include="Content\img\img16.jpeg" />
+    <Content Include="Content\img\img16.jpg" />
     <Content Include="Content\img\img2.jpeg" />
+    <Content Include="Content\img\img2.jpg" />
     <Content Include="Content\img\img3.jpeg" />
+    <Content Include="Content\img\img3.jpg" />
     <Content Include="Content\img\img4.jpeg" />
+    <Content Include="Content\img\img4.jpg" />
     <Content Include="Content\img\img5.jpeg" />
+    <Content Include="Content\img\img5.jpg" />
     <Content Include="Content\img\img6.jpeg" />
+    <Content Include="Content\img\img6.jpg" />
     <Content Include="Content\img\img7.jpeg" />
+    <Content Include="Content\img\img7.jpg" />
     <Content Include="Content\img\img8.jpeg" />
+    <Content Include="Content\img\img8.jpg" />
     <Content Include="Content\img\img9.jpeg" />
+    <Content Include="Content\img\img9.jpg" />
+    <Content Include="Content\img\LandingBackground.png" />
+    <Content Include="Content\img\linkedin-brands.svg" />
     <Content Include="Content\img\Mesa de trabajo 1%404x.png" />
     <Content Include="Content\img\Mesa de trabajo 15%408x.png" />
     <Content Include="Content\img\Nav Toggle--Maximize.svg" />
+    <Content Include="Content\img\profile.svg" />
     <Content Include="Content\img\profileimg.jpg" />
+    <Content Include="Content\img\recent-solid.svg" />
+    <Content Include="Content\img\Register_Landing.png" />
     <Content Include="Content\img\search.svg" />
+    <Content Include="Content\img\trending.svg" />
+    <Content Include="Content\img\twitter-square-brands.svg" />
     <Content Include="Content\img\Twitter.svg" />
     <Content Include="Content\img\Upload Icon.svg" />
+    <Content Include="Content\img\upload-solid.svg" />
     <Content Include="Content\normalize.css" />
-    <Content Include="Content\img\Register_Landing.png" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\Site.min.css">
+      <DependentUpon>Site.css</DependentUpon>
+    </Content>
     <Content Include="Content\test.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
@@ -244,9 +273,14 @@
     <Content Include="fonts\BebasNeue\fonts\BebasNeue-webfont.woff" />
     <Content Include="fonts\BebasNeue\fonts\BebasNeue-webfont.woff2" />
     <Content Include="fonts\BebasNeue\fonts\BebasNeue-webfontd41d.eot" />
+    <Content Include="WebForm1.aspx" />
     <None Include="bundleconfig.json" />
     <Content Include="Content\Site.scss" />
     <Content Include="Content\Site.css.map" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\VidYous - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -400,6 +434,13 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

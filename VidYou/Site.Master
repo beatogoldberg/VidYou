@@ -12,7 +12,7 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
     <asp:ContentPlaceHolder ID="HeaderStyle" runat="server">
@@ -72,7 +72,7 @@
                         <ul class="header__items">
                             <li class="header__item header__item--profilePicture"></li>
                             <li class="header__item"><a href="~/Account/Profile"
-                                    class="header__item--profile"><%: Context.User.Identity.GetUserName()  %></a></li>
+                                class="header__item--profile"><%: Context.User.Identity.GetUserName()  %></a></li>
                             <li class="header__item header__item--last">
                                 <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off"
                                     LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut"
@@ -88,21 +88,24 @@
                         <img runat="server" src="~/Content/img/home.svg" alt="Home Page" class="sidenav__svg">
                     </a>
                 </li>
-                <li class="sidenav__item"><a runat="server" href=""><img runat="server" src="~/Content/img/profile.svg"
-                            alt="Your Profile" class="sidenav__svg"></a></li>
-                <li class="sidenav__item"><a runat="server" href=""><img runat="server"
-                            src="~/Content/img/upload-solid.svg" alt="Upload" class="sidenav__svg"></a></li>
-                <li class="sidenav__item"><a runat="server" href=""><img runat="server"
-                            src="~/Content/img/recent-solid.svg" alt="Recent Videos" class="sidenav__svg"></a></li>
-                <li class="sidenav__item sidenav__item--last"><a runat="server" href=""><img runat="server"
-                            src="~/Content/img/trending.svg" alt="Trending Videos" class="sidenav__svg"></a></li>
+                <li class="sidenav__item"><a runat="server" href="">
+                    <img runat="server" src="~/Content/img/profile.svg"
+                        alt="Your Profile" class="sidenav__svg"></a></li>
+                <li class="sidenav__item"><a runat="server" href="">
+                    <img runat="server"
+                        src="~/Content/img/upload-solid.svg" alt="Upload" class="sidenav__svg"></a></li>
+                <li class="sidenav__item"><a runat="server" href="">
+                    <img runat="server"
+                        src="~/Content/img/recent-solid.svg" alt="Recent Videos" class="sidenav__svg"></a></li>
+                <li class="sidenav__item sidenav__item--last"><a runat="server" href="">
+                    <img runat="server"
+                        src="~/Content/img/trending.svg" alt="Trending Videos" class="sidenav__svg"></a></li>
             </ul>
             <asp:LoginView runat="server" ViewStateMode="Disabled">
                 <AnonymousTemplate>
                     <div class="landing">
                         <div class="landing__overlay">
-                            <h1 class="landing__heading">
-                                You're about to see art in its truest form.
+                            <h1 class="landing__heading">You're about to see art in its truest form.
                                 This is a beautiful way of expressing what is
                                 only possible due to human ingenuity
                             </h1>
@@ -120,23 +123,32 @@
                 <div class="footer__overlay">
                     <hr class="footer__line footer__line--right">
                     <hr class="footer__line footer__line--left">
-                    <h1 class="footer__brand footer__brand--middle">
-                        VIDYOUS
+                    <h1 class="footer__brand footer__brand--middle">VIDYOUS
                     </h1>
                     <ul class="footer__items footer__items--left">
-                        <li class="footer__item">Licences</li>
-                        <li class="footer__item">Contact</li>
-                        <li class="footer__item footer__item--last">About</li>
+                        <li class="footer__item"><a>Licences</a></li>
+                        <li class="footer__item"><a>Contact</a></li>
+                        <li class="footer__item footer__item--last"><a>About</a></li>
                     </ul>
                     <ul class="footer__items footer__items--right">
-                        <li class="footer__item">Terms of use</li>
-                        <li class="footer__item">People Involved</li>
-                        <li class="footer__item footer__item--last">Privacy</li>
+                        <li class="footer__item"><a>Terms of use</a></li>
+                        <li class="footer__item"><a>People Involved</a></li>
+                        <li class="footer__item footer__item--last"><a>Privacy & Policy</a></li>
                     </ul>
                     <ul class="footer__items footer__items--middle">
-                        <li class="footer__item">F</li>
-                        <li class="footer__item">T</li>
-                        <li class="footer__item footer__item--last">L</li>
+                        <li class="footer__item footer__item--middle">
+                            <a>
+                                <img src="Content/img/facebook-square-brands.svg" class="footer__svg" />
+                            </a>
+                        </li>
+                        <li class="footer__item footer__item--middle"><a>
+                            <img src="Content/img/twitter-square-brands.svg" class="footer__svg" />
+                        </a>
+                        </li>
+                        <li class="footer__item footer__item--middle footer__item--last"><a>
+                            <img src="Content/img/linkedin-brands.svg" class="footer__svg" />
+                        </a>
+                        </li>
                     </ul>
                 </div>
             </div>
